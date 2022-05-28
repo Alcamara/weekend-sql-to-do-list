@@ -15,6 +15,28 @@ toDoRouter.get('/',(req,res)=>{
         })
 })
 
+toDoRouter.post('/',(req,res)=>{
+    const newTask = req.body.task;
+    const isDone = req.body.isDone;
+    console.log(newTask, isDone);
+
+    const insertQuery = `
+    INSERT INTO "to-do" (task, "isDone")
+    VALUES ($1, $2);
+    `
+    const sqlParams = [
+        newTask,
+        isDone
+    ]
+
+    pool.query(insertQuery,sqlParams)
+        .then((dbRes)=>{
+            res.sendStatus(201)
+        }).catch((err)=>{
+            console.log('Error during post',err);
+        })
+})
+
 toDoRouter.delete('/:id',(req,res)=>{
     const id = req.params.id;
     

@@ -6,8 +6,29 @@ $(document).ready(()=>{
     $('#to-do_tbody').on('click','.delete-btn',onDelete)
 })
 
-function onSubmit() {
-    console.log('JQ');
+/*
+function that takes in value and
+sent a post request to server
+*/
+function onSubmit(e) {
+    e.preventDefault()
+
+    $.ajax({
+        url:'/toDo',
+        method:'POST',
+        data: {
+            task: $('#to-do_newTask').val(),
+            isDone: false
+        }
+    }).then(((result)=>{
+        $('#to-do_newTask').val('')
+        getToDoList()
+        alert('New Task Was Added')
+    })).catch((err)=>{
+        console.log('error sending new task to server', err);
+    })
+
+   
 }
 
 // get todo list from database
@@ -46,9 +67,15 @@ function displayTask(get) {
     }
 }
 
+/*
+on click sends a delete
+request to server and
+display new list
+*/
 function onDelete (){
     
     const id = $(this).parents('tr').data('id')
+    const task = $(this).parents('tr')
     console.log(id);
 
     $.ajax({
@@ -56,6 +83,7 @@ function onDelete (){
         method: 'DELETE'
     }).then(()=>{
         console.log('sent delete request');
+        alert(`Task has been remove!`)
         getToDoList()
     }).catch((err)=>{
         console.log('delete request failed');

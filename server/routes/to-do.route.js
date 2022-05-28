@@ -15,4 +15,23 @@ toDoRouter.get('/',(req,res)=>{
         })
 })
 
+toDoRouter.delete('/:id',(req,res)=>{
+    const id = req.params.id;
+    
+    const deleteQuery = `
+        DELETE FROM "to-do"
+        WHERE "id" = $1;
+    `
+    const sqlParams = [
+        id,
+    ]
+
+    pool.query(deleteQuery,sqlParams)
+        .then(()=>{
+            res.sendStatus(204);
+        }).catch((err)=>{
+            console.log('error occur during query',err);
+        })
+})
+
 module.exports = toDoRouter;

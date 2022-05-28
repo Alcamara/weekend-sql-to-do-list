@@ -11,5 +11,13 @@ const config = {
 
 const pool = new pg.Pool(config);
 
+pool.on('connect',()=>{
+    console.log('Connected to postgres');
+});
 
-module.exports = pool ;
+pool.on('error',()=>{
+    console.log('Error connecting to postgres');
+})
+
+
+module.exports = pool;

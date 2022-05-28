@@ -4,7 +4,7 @@ const pool = require('../module/pool');
 
 
 toDoRouter.get('/',(req,res)=>{
-    const query = `SELECT * FROM "to-do;"`
+    const query = `SELECT * FROM "to-do";`
 
     pool.query(query)
         .then((result)=>{

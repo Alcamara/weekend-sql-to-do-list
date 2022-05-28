@@ -54,11 +54,10 @@ function displayTask(get) {
     for (let item of get) {
         tRow.append(`
         <tr data-id='${item.id}'>
-            <td><input type="text" value="${item.task}" disabled></td>
-            <td>${item.isDone}</td>
-            <td>
-                <input type="checkbox" name="" id="">
+            <td data-isDone='${item.isDone}'>
+                <input  type="checkbox" name="" id="">
             </td>
+            <td><input type="text" value="${item.task}" disabled></td>
             <td>
                 <button class='delete-btn'>Delete</button>
             </td>

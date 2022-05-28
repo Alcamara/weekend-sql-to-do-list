@@ -25,6 +25,10 @@ table,thead,th,tbody,tr,td{
     border: 1px solid black;
 }
 
+.done{
+    text-decoration-line: line-through;
+}
+
 #to-do_tbody input {
     border-style: none;
     text-align: center ;

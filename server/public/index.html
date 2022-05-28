@@ -4,11 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project_Starter</title>
+    <title>To-do List</title>
+    <script src="./vender/jquery-3.6.0.min.js"></script>
+    <script src="./script/client.js"></script>
+    <link rel="stylesheet" href="./style/stylesheet.css">
 </head>
 <body>
+    <header>
+        <h1>To-do List</h1>
+    </header>
+    <main>
+        <section class="to-do_input">
+
+        </section>
+        <section class="to-do_list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Is Task Complete?</th>
+                        <th>Mark button</th>
+                        <th>Delete button</th>
+                    </tr>
+                </thead>
+                <tbody id="to-do_tbody">
+                    <tr>
+                        <td><input type="text" value="Take out trash" disabled></td>
+                        <td>false</td>
+                        <td>
+                            <button>Mark as Complete</button>
+                        </td>
+                        <td>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
     
     <script src="jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+    <script src="client d.js"></script>
 </body>
 </html>

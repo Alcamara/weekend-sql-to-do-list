@@ -1,0 +1,19 @@
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    font-size: 16px;
+    
+}
+
+table,thead,th,tbody,tr,td{
+    text-align: center;
+    border: 1px solid black;
+}
+
+#to-do_tbody input {
+    border-style: none;
+    text-align: center ;
+}

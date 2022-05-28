@@ -8,6 +8,18 @@
     
 }
 
+/* ===================
+input section
+=======================*/
+
+.to-do_input{
+    margin: 2rem 0;
+}
+
+/* ====================
+
+=======================*/
+
 table,thead,th,tbody,tr,td{
     text-align: center;
     border: 1px solid black;

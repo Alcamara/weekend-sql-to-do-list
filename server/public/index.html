@@ -15,7 +15,23 @@
     </header>
     <main>
         <section class="to-do_input">
-
+            <!-- container begins -->
+                <div class="container">
+                    <!-- form begins -->
+                    <form id="to-do_form">
+                        <div class="row">
+                            <div class="col">
+                                <label for="in"></label>
+                            <input type="text" id="to-do_task" placeholder="Create Task">
+                            </div>
+                            <div class="col">
+                                <input type="button" value="Add Task">
+                            </div>
+                        </div>
+                    </form>
+                    <!-- form ends -->
+                </div>
+                <!-- container ends -->
         </section>
         <section class="to-do_list">
             <table>
@@ -32,7 +48,7 @@
                         <td><input type="text" value="Take out trash" disabled></td>
                         <td>false</td>
                         <td>
-                            <button>Mark as Complete</button>
+                            <input type="checkbox" name="" id="">
                         </td>
                         <td>
                             <button>Delete</button>

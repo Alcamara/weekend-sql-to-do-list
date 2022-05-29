@@ -1,20 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 *,*::after,*::before{
     margin: 0;
     padding: 0;
 }
 
-:root{
+body{
     font-size: 16px;
-    
+    font-family: 'Lato', sans-serif;
 }
 
-/* ===================
-input section
+/* ======================
+    header section
 =======================*/
-
-.to-do_input{
-    margin: 2rem 0;
-}
 
 .to-do_header{
     background-color: rgb(60, 60, 170);
@@ -25,11 +23,21 @@ input section
 }
 
 .to-do_header h1 {
+    font-size: 3rem;
     color: beige;
+    font-weight: 700;
+}
+
+/* ===================
+    input section
+=======================*/
+
+.to-do_input{
+    margin: 2rem 0;
 }
 
 /* ====================
-
+    table section
 =======================*/
 
 table, tr{
@@ -42,17 +50,13 @@ th,td{
 }
 
 
-input{
-    color: blue;
+#to-do_tbody input {
+    border-style: none;
+    text-align: center ;
 }
 
 .done{
     color: red;
     font-style: italic;
     text-decoration-line: line-through; 
-}
-
-#to-do_tbody input {
-    border-style: none;
-    text-align: center ;
 }

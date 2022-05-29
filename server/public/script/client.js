@@ -77,7 +77,7 @@ function displayTask(get) {
 }
 
 
-
+//display sweet alert to user 
 function confirmDelete() {
     swal({
         title: "Are you sure?",
@@ -123,7 +123,6 @@ function onDelete (thisArg){
 }
 
 function onChange(){
-    completeAlert()
     const id = $(this).parents('tr').data('id')
     let isTaskDone = $(this).parent().data('istaskdone');
     
@@ -131,34 +130,36 @@ function onChange(){
     
    const newTaskStatus = changeTaskStatus(isTaskDone,this)
 
+   const text = newTaskStatus.msg;
+
+   console.log(text);
+
 
     $.ajax({
         url:'/todo/'+id,
         method:'PUT',
         data: {
-            isDone: newTaskStatus
+            isDone: newTaskStatus.isTaskDone
         }
     }).then(()=>{
         console.log('Put require was sent');
         getToDoList()
+        completeAlert(newTaskStatus)
     }).catch((err)=>{
 console.log('Put request failed',err);
     })
 }
 
-function changeTaskStatus(boolean, thisCheckEvent) {
-    const newTaskStatus = !boolean;
-    let task = $(thisCheckEvent).parent().next().children('.to-do_text')
+function changeTaskStatus(isTaskDone, thisCheckEvent) {
+    const newTaskStatus = !isTaskDone;
+    let text = $(thisCheckEvent).parent().next().children('.to-do_text').text()
 
-    console.log(newTaskStatus, task);
+    console.log(newTaskStatus, text);
 
-    if(newTaskStatus === true){
-        task.addClass('done')
-    }else if (newTaskStatus === false){
-        task.removeClass('done')
-    }
-
-    return newTaskStatus;
+    return {
+        isTaskDone: newTaskStatus,
+        msg: text
+    };
     
 }
 
@@ -180,10 +181,10 @@ function deleteAlert() {
     `)
 }
 
-function completeAlert() {
+function completeAlert(taskText) {
     $('#taskAlert').append(`
     <div class="alert alert-primary alert-dismissible" role="alert">
-        <div>Task was completed!</div>
+        <div>${taskText.msg} task was completed!</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     `)

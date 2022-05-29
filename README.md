@@ -23,7 +23,7 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 <img src="image/mobile.png" alt="mobile-verison" height="300">
 
-<img src="image/to-do_demo.gif" alt="demo of to-do list" height="300">
+<img src="image/do-to_demo.gif" alt="demo of to-do list">
 
 ### Prerequisites
 

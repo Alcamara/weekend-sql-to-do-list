@@ -20,9 +20,13 @@ input section
 
 =======================*/
 
-table{
+table, tr{
     text-align: center;
     border: 1px solid black;
+}
+
+th,td{
+    padding: 1rem;
 }
 
 
@@ -31,7 +35,7 @@ input{
 }
 
 .done{
-    color: gray;
+    color: red;
     font-style: italic;
     text-decoration-line: line-through;
 }

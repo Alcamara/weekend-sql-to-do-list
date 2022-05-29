@@ -5,6 +5,7 @@ $(document).ready(()=>{
     $('#to-do_form').on('click','#submit-btn',onSubmit)
     $('#to-do_tbody').on('click','.delete-btn',onDelete)
     $('#to-do_tbody').on('change','.to-do_checkbox',onChange)
+    
 })
 
 /*
@@ -13,6 +14,7 @@ sent a post request to server
 */
 function onSubmit(e) {
     e.preventDefault()
+    addAlert()
 
     $.ajax({
         url:'/toDo',
@@ -24,7 +26,7 @@ function onSubmit(e) {
     }).then(((result)=>{
         $('#to-do_newTask').val('')
         getToDoList()
-        alert('New Task Was Added')
+        
     })).catch((err)=>{
         console.log('error sending new task to server', err);
     })
@@ -59,9 +61,11 @@ function displayTask(get) {
             <td data-istaskdone='${item.isDone}'>
                 <input  type="checkbox" name="" class='to-do_checkbox'>
             </td>
-            <td data-task='${item.task}'><input type="text" id='${item.id}' class='to-do_text' value="${item.task}" disabled></td>
+            <td data-task='${item.task}'>
+                <p class='to-do_text'>${item.task}</p>
+            </td>
             <td>
-                <button class='delete-btn'>Delete</button>
+                <button type="button" class='delete-btn btn btn-danger'>Delete</button>
             </td>
         </tr>
         `)
@@ -71,9 +75,11 @@ function displayTask(get) {
             <td data-istaskdone='${item.isDone}'>
                 <input  type="checkbox" name="" class='to-do_checkbox' checked>
             </td>
-            <td data-task='${item.task}'><input type="text" id='${item.id}' class='to-do_text done' value="${item.task}" disabled></td>
+            <td data-task='${item.task}'>
+                <p class='to-do_text done'>${item.task}</p>
+            </td>
             <td>
-                <button class='delete-btn'>Delete</button>
+                <button type="button" class='delete-btn btn btn-danger'>Delete</button>
             </td>
         </tr>
         `)
@@ -87,7 +93,7 @@ request to server and
 display new list
 */
 function onDelete (){
-    
+    deleteAlert()
     const id = $(this).parents('tr').data('id')
     const task = $(this).parents('tr')
     console.log(id);
@@ -97,7 +103,6 @@ function onDelete (){
         method: 'DELETE'
     }).then(()=>{
         console.log('sent delete request');
-        alert(`Task has been remove!`)
         getToDoList()
     }).catch((err)=>{
         console.log('delete request failed');
@@ -105,7 +110,7 @@ function onDelete (){
 }
 
 function onChange(){
-    console.log(`I am checked`);
+    completeAlert()
     const id = $(this).parents('tr').data('id')
     let isTaskDone = $(this).parent().data('istaskdone');
     
@@ -142,4 +147,31 @@ function changeTaskStatus(boolean, thisCheckEvent) {
 
     return newTaskStatus;
     
+}
+
+function addAlert() {
+    $('#taskAlert').append(`
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <div>Task was deleted</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `)
+}
+
+function deleteAlert() {
+    $('#taskAlert').append(`
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <div>New task was added</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `)
+}
+
+function completeAlert() {
+    $('#taskAlert').append(`
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        <div>Task was completed!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `)
 }

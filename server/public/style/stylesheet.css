@@ -16,6 +16,18 @@ input section
     margin: 2rem 0;
 }
 
+.to-do_header{
+    background-color: rgb(60, 60, 170);
+}
+
+.to-do_header .container{
+    padding: 2.5rem 0;
+}
+
+.to-do_header h1 {
+    color: beige;
+}
+
 /* ====================
 
 =======================*/

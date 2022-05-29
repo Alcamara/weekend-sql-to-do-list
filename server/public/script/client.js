@@ -4,6 +4,7 @@ $(document).ready(()=>{
     getToDoList()
     $('#to-do_form').on('click','#submit-btn',onSubmit)
     $('#to-do_tbody').on('click','.delete-btn',onDelete)
+    $('#to-do_tbody').on('change','.to-do_checkbox',onChange)
 })
 
 /*
@@ -55,7 +56,7 @@ function displayTask(get) {
         tRow.append(`
         <tr data-id='${item.id}'>
             <td data-isDone='${item.isDone}'>
-                <input  type="checkbox" name="" id="">
+                <input  type="checkbox" name="" class='to-do_checkbox'>
             </td>
             <td><input type="text" value="${item.task}" disabled></td>
             <td>
@@ -87,4 +88,8 @@ function onDelete (){
     }).catch((err)=>{
         console.log('delete request failed');
     })
+}
+
+function onChange(){
+    console.log(`I am checked`);
 }

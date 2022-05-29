@@ -20,9 +20,14 @@ input section
 
 =======================*/
 
-table,thead,th,tbody,tr,td{
+table{
     text-align: center;
     border: 1px solid black;
+}
+
+
+#to-do_tbody td > input{
+    color: blue;
 }
 
 .done{

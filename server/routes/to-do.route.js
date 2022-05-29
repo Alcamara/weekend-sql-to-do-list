@@ -56,4 +56,27 @@ toDoRouter.delete('/:id',(req,res)=>{
         })
 })
 
+toDoRouter.put('/:id',(req,res)=>{
+    const id = req.params.id;
+    const newTaskStatus = req.body.isDone;
+
+    const updateTaskStatusQuery =`
+        UPDATE "to-do"
+        SET "isDone" = $2
+        WHERE  id = $1;
+    `
+
+    const sqlParams = [
+        id,
+        newTaskStatus,
+    ]
+
+    pool.query(updateTaskStatusQuery,sqlParams)
+        .then(()=>{
+            res.sendStatus(200)
+        }).catch((err)=>{
+            console.log('Error occur while updating task status',err);
+        })
+})
+
 module.exports = toDoRouter;

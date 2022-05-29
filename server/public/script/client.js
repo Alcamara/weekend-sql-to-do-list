@@ -53,17 +53,31 @@ function displayTask(get) {
     tRow.empty()
 
     for (let item of get) {
-        tRow.append(`
+        if(item.isDone === false){
+            tRow.append(`
         <tr data-id='${item.id}'>
-            <td data-isDone='${item.isDone}'>
+            <td data-istaskdone='${item.isDone}'>
                 <input  type="checkbox" name="" class='to-do_checkbox'>
             </td>
-            <td><input type="text" value="${item.task}" disabled></td>
+            <td data-task='${item.task}'><input type="text" id='${item.id}' class='to-do_text' value="${item.task}" disabled></td>
             <td>
                 <button class='delete-btn'>Delete</button>
             </td>
         </tr>
         `)
+        } else if(item.isDone === true){
+            tRow.append(`
+        <tr data-id='${item.id}'>
+            <td data-istaskdone='${item.isDone}'>
+                <input  type="checkbox" name="" class='to-do_checkbox' checked>
+            </td>
+            <td data-task='${item.task}'><input type="text" id='${item.id}' class='to-do_text done' value="${item.task}" disabled></td>
+            <td>
+                <button class='delete-btn'>Delete</button>
+            </td>
+        </tr>
+        `)
+        }
     }
 }
 
@@ -92,4 +106,40 @@ function onDelete (){
 
 function onChange(){
     console.log(`I am checked`);
+    const id = $(this).parents('tr').data('id')
+    let isTaskDone = $(this).parent().data('istaskdone');
+    
+    console.log(isTaskDone, id);
+    
+   const newTaskStatus = changeTaskStatus(isTaskDone,this)
+
+
+    $.ajax({
+        url:'/todo/'+id,
+        method:'PUT',
+        data: {
+            isDone: newTaskStatus
+        }
+    }).then(()=>{
+        console.log('Put require was sent');
+        getToDoList()
+    }).catch((err)=>{
+console.log('Put request failed',err);
+    })
+}
+
+function changeTaskStatus(boolean, thisCheckEvent) {
+    const newTaskStatus = !boolean;
+    let task = $(thisCheckEvent).parent().next().children('.to-do_text')
+
+    console.log(newTaskStatus, task);
+
+    if(newTaskStatus === true){
+        task.addClass('done')
+    }else if (newTaskStatus === false){
+        task.removeClass('done')
+    }
+
+    return newTaskStatus;
+    
 }

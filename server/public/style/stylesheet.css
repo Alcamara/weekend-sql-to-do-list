@@ -26,11 +26,13 @@ table{
 }
 
 
-#to-do_tbody td > input{
+input{
     color: blue;
 }
 
 .done{
+    color: gray;
+    font-style: italic;
     text-decoration-line: line-through;
 }
 

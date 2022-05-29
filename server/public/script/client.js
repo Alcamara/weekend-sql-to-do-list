@@ -14,22 +14,29 @@ sent a post request to server
 */
 function onSubmit(e) {
     e.preventDefault()
-    addAlert()
+    const newTask = $('#to-do_newTask').val()
+    
+    if(newTask != ''){
 
-    $.ajax({
-        url:'/toDo',
-        method:'POST',
-        data: {
-            task: $('#to-do_newTask').val(),
-            isDone: false
-        }
-    }).then(((result)=>{
-        $('#to-do_newTask').val('')
-        getToDoList()
-        
-    })).catch((err)=>{
-        console.log('error sending new task to server', err);
-    })
+            addAlert(newTask)
+
+            $.ajax({
+                url:'/toDo',
+                method:'POST',
+                data: {
+                    task: newTask,
+                    isDone: false
+                }
+            }).then(((result)=>{
+                $('#to-do_newTask').val('')
+                getToDoList()
+                
+            })).catch((err)=>{
+                console.log('error sending new task to server', err);
+            })
+    } else{
+        swal("Please enter Task");
+    }
 
    
 }
@@ -163,10 +170,10 @@ function changeTaskStatus(isTaskDone, thisCheckEvent) {
     
 }
 
-function addAlert() {
+function addAlert(newTask) {
     $('#taskAlert').append(`
     <div class="alert alert-success alert-dismissible" role="alert">
-        <div>Task was created</div>
+        <div>${newTask} task was created</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     `)

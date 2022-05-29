@@ -49,7 +49,7 @@ input{
 .done{
     color: red;
     font-style: italic;
-    text-decoration-line: line-through;
+    text-decoration-line: line-through; 
 }
 
 #to-do_tbody input {

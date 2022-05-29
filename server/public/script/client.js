@@ -3,7 +3,7 @@ console.log('JS');
 $(document).ready(()=>{
     getToDoList()
     $('#to-do_form').on('click','#submit-btn',onSubmit)
-    $('#to-do_tbody').on('click','.delete-btn',onDelete)
+    $('#to-do_tbody').on('click','.delete-btn',confirmDelete)
     $('#to-do_tbody').on('change','.to-do_checkbox',onChange)
     
 })
@@ -87,15 +87,39 @@ function displayTask(get) {
     }
 }
 
+
+
+function confirmDelete() {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this task",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            
+          swal("Poof! Your task deleted!", {
+            icon: "success",
+          });
+          onDelete(this)
+        } else {
+          swal("Your task is safe!");
+        }
+      });
+}
+
 /*
 on click sends a delete
 request to server and
 display new list
 */
-function onDelete (){
-    deleteAlert()
-    const id = $(this).parents('tr').data('id')
-    const task = $(this).parents('tr')
+function onDelete (thisArg){
+    //deleteAlert()
+    
+    const id = $(thisArg).parents('tr').data('id')
+    const task = $(thisArg).parents('tr')
     console.log(id);
 
     $.ajax({
@@ -152,7 +176,7 @@ function changeTaskStatus(boolean, thisCheckEvent) {
 function addAlert() {
     $('#taskAlert').append(`
     <div class="alert alert-success alert-dismissible" role="alert">
-        <div>Task was deleted</div>
+        <div>Task was created</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     `)
@@ -161,7 +185,7 @@ function addAlert() {
 function deleteAlert() {
     $('#taskAlert').append(`
     <div class="alert alert-danger alert-dismissible" role="alert">
-        <div>New task was added</div>
+        <div>New task was deleted</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     `)

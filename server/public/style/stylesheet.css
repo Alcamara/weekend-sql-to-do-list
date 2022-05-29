@@ -20,12 +20,19 @@ input section
 
 =======================*/
 
-table,thead,th,tbody,tr,td{
+table{
     text-align: center;
     border: 1px solid black;
 }
 
+
+input{
+    color: blue;
+}
+
 .done{
+    color: gray;
+    font-style: italic;
     text-decoration-line: line-through;
 }
 

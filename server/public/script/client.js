@@ -55,35 +55,24 @@ function displayTask(get) {
     tRow.empty()
 
     for (let item of get) {
-        if(item.isDone === false){
-            tRow.append(`
+
+        tRow.append(`
         <tr data-id='${item.id}'>
             <td data-istaskdone='${item.isDone}'>
-                <input  type="checkbox" name="" class='to-do_checkbox'>
+                <input id='checkbox-${item.id}'  type="checkbox" name="" class='to-do_checkbox'>
             </td>
             <td data-task='${item.task}'>
-                <p class='to-do_text'>${item.task}</p>
+                <p id='td-${item.id}' class='to-do_text'>${item.task}</p>
             </td>
             <td>
                 <button type="button" class='delete-btn btn btn-danger'>Delete</button>
             </td>
-        </tr>
-        `)
-        } else if(item.isDone === true){
-            tRow.append(`
-        <tr data-id='${item.id}'>
-            <td data-istaskdone='${item.isDone}'>
-                <input  type="checkbox" name="" class='to-do_checkbox' checked>
-            </td>
-            <td data-task='${item.task}'>
-                <p class='to-do_text done'>${item.task}</p>
-            </td>
-            <td>
-                <button type="button" class='delete-btn btn btn-danger'>Delete</button>
-            </td>
-        </tr>
-        `)
-        }
+        </tr>`)
+        
+        if(item.isDone === true){
+           $(`#td-${item.id}`).addClass('done');
+           $(`#checkbox-${item.id}`).attr('checked','checked')
+        } 
     }
 }
 

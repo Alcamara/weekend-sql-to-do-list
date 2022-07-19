@@ -12,10 +12,7 @@
 
 _Duration: 3 day Sprint_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
-
-
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+The To-Do List web app allows users to add a task to a list. Once the task is on the list, users can mark the task as being done or delete an item from the to-do list 
 
 ## Screen Shot
 
